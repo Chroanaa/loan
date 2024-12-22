@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2024 at 09:53 AM
+-- Generation Time: Dec 22, 2024 at 10:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,7 +48,7 @@ CREATE TABLE `loan_applications` (
   `loan_amount` decimal(10,2) NOT NULL,
   `loan_term` int(11) NOT NULL,
   `interest_rate` decimal(5,2) NOT NULL,
-  `status` enum('Pending','Approved','Rejected') NOT NULL,
+  `status` enum('Pending','Approved','Rejected','Paid') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -58,8 +58,8 @@ CREATE TABLE `loan_applications` (
 --
 
 INSERT INTO `loan_applications` (`loan_id`, `client_id`, `loan_amount`, `loan_term`, `interest_rate`, `status`, `created_at`, `updated_at`) VALUES
-(3, 2, 323.00, 23232, 32.00, 'Approved', '2024-12-22 08:24:23', '2024-12-22 08:35:14'),
-(4, 2, 323.00, 2323, 232.00, 'Pending', '2024-12-22 08:38:25', '2024-12-22 08:38:25');
+(3, 2, 323.00, 23232, 32.00, 'Paid', '2024-12-22 08:24:23', '2024-12-22 09:18:10'),
+(4, 2, 323.00, 2323, 232.00, 'Approved', '2024-12-22 08:38:25', '2024-12-22 09:23:40');
 
 -- --------------------------------------------------------
 
@@ -74,6 +74,13 @@ CREATE TABLE `loan_repayments` (
   `payment_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `remaining_balance` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `loan_repayments`
+--
+
+INSERT INTO `loan_repayments` (`repayment_id`, `loan_id`, `payment_amount`, `payment_date`, `remaining_balance`) VALUES
+(2, 3, 5000.00, '2024-12-22 09:18:10', -4677.00);
 
 -- --------------------------------------------------------
 
@@ -95,9 +102,9 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`notification_id`, `client_id`, `notification_type`, `message`, `notification_date`, `is_read`) VALUES
-(1, 2, 'Payment Reminder', 'Your payment is due soon.', '2024-12-22 08:50:58', 0),
-(2, 2, 'Loan Status Update', 'Your loan application has been approved.', '2024-12-22 08:50:58', 0),
-(3, 2, 'Overdue Reminder', 'Your payment is overdue.', '2024-12-22 08:50:58', 0);
+(1, 2, 'Payment Reminder', 'Your payment is due soon.', '2024-12-22 08:50:58', 1),
+(2, 2, 'Loan Status Update', 'Your loan application has been approved.', '2024-12-22 08:50:58', 1),
+(3, 2, 'Overdue Reminder', 'Your payment is overdue.', '2024-12-22 08:50:58', 1);
 
 -- --------------------------------------------------------
 
@@ -211,13 +218,13 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `loan_repayments`
 --
 ALTER TABLE `loan_repayments`
-  MODIFY `repayment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `repayment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `notifications`
