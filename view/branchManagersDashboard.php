@@ -10,13 +10,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client's Dashboard</title>
+    <title>Branch Manager's Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Welcome to the Client Dashboard</h2>
+        <h2>Welcome to the Branch Manager's Dashboard</h2>
         <a href="../controller/logoutController.php" class="btn btn-danger">Logout</a>
     </div>
 

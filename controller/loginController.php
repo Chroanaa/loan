@@ -54,11 +54,11 @@ if (isset($_POST["login"])) {
                     }
 
                     // Redirect based on role
-                    if ($row['role'] == 'Loan Officers') {
+                    if ($row['role'] == 'lo') {
                         header("Location: loanOfficersDashboard.php");
                     } elseif ($row['role'] == 'admin') {
                         header("Location: adminDashboard.php");
-                    } elseif ($row['role'] == 'Branch Managers') {
+                    } elseif ($row['role'] == 'bm') {
                         header("Location: branchManagersDashboard.php");
                     } elseif ($row['role'] == 'client') {
                         header("Location: clientDashboard.php");
@@ -101,11 +101,11 @@ if (isset($_COOKIE["remember_me"])) {
             $_SESSION['show_modal'] = true;
             
             // Redirect based on role
-            if ($row['role'] == 'Loan Officers') {
+            if ($row['role'] == 'lo') {
                 header("Location: loanOfficersDashboard.php");
             } elseif ($row['role'] == 'admin') {
                 header("Location: adminDashboard.php");
-            } elseif ($row['role'] == 'Branch Managers') {
+            } elseif ($row['role'] == 'bm') {
                 header("Location: branchManagersDashboard.php");
             } elseif ($row['role'] == 'client') {
                 header("Location: clientDashboard.php");
