@@ -12,7 +12,10 @@ include '../controller/registrationController.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container mt-5">
+<div class="client-page d-flex justify-content-center align-items-center" 
+        style="background:url(../wwwroot/img/hero-bg.jpg) no-repeat center /cover; min-height: 100vh;">
+
+    <div class="container p-5 rounded-3 shadow bg-light">
         <h2>Sign Up</h2>
         <?php
         if (isset($_SESSION['errors'])) {
@@ -54,6 +57,7 @@ include '../controller/registrationController.php';
             <button type="submit" name="submit" class="btn btn-primary">Sign Up</button>
         </form>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
