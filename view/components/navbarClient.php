@@ -1,6 +1,6 @@
 <?php
 // Fetch unread notifications count
-require_once "../model/db.php";
+require "../model/db.php";
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT COUNT(*) AS unread_count FROM notifications WHERE client_id = ? AND is_read = 0";
 $stmt = $conn->prepare($sql);
@@ -8,8 +8,7 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $unread_count = $result->fetch_assoc()['unread_count'];
-$stmt->close();
-$conn->close();
+
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

@@ -17,6 +17,18 @@ $stmt->execute();
 $result = $stmt->get_result();
 $loans = $result->fetch_all(MYSQLI_ASSOC);
 
+$stmt->close();
+
+// Fetch client loan repayments
+$sql = "SELECT * FROM loan_repayments WHERE loan_id IN (SELECT loan_id FROM loan_applications WHERE client_id = ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$repayments = $result->fetch_all(MYSQLI_ASSOC);
+
+
+
 // Include notifications
 include '../controller/notificationsController.php';
 ?>
@@ -77,6 +89,30 @@ include '../controller/notificationsController.php';
                         <a href="makePayment.php?loan_id=<?php echo $loan['loan_id']; ?>" class="btn btn-success">Make Payment</a>
                         <?php endif; ?>
                     </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <h3 class="mt-4">Your Loan Repayments</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Repayment ID</th>
+                    <th>Loan ID</th>
+                    <th>Payment Amount</th>
+                    <th>Payment Date</th>
+                    <th>Remaining Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($repayments as $repayment): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($repayment['repayment_id']); ?></td>
+                    <td><?php echo htmlspecialchars($repayment['loan_id']); ?></td>
+                    <td><?php echo htmlspecialchars($repayment['payment_amount']); ?></td>
+                    <td><?php echo htmlspecialchars($repayment['payment_date']); ?></td>
+                    <td><?php echo htmlspecialchars($repayment['remaining_balance']); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

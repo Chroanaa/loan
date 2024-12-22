@@ -40,3 +40,8 @@ include '../controller/makePaymentController.php';
     <script src="js/script.js"></script>
 </body>
 </html>
+
+<?php 
+$stmt->close();
+$conn->close();
+?>

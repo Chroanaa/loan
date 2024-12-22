@@ -11,7 +11,7 @@ if (!isset($_GET['loan_id'])) {
 }
 
 // Connect to the database
-require_once "../model/db.php";
+require "../model/db.php";
 
 $loan_id = $_GET['loan_id'];
 $user_id = $_SESSION['user_id'];
@@ -24,7 +24,6 @@ $result = $stmt->get_result();
 $loan = $result->fetch_assoc();
 
 $stmt->close();
-$conn->close();
 
 if (!$loan || $loan['status'] != 'Approved') {
     header("Location: ../view/clientDashboard.php");
@@ -42,11 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        // Connect to the database
-        require_once "../model/db.php";
-
         // Calculate remaining balance
         $remaining_balance = $loan['loan_amount'] - $payment_amount;
+
+        // Connect to the database
+        require_once "../model/db.php";
 
         // Insert payment into the database
         $sql = "INSERT INTO loan_repayments (loan_id, payment_amount, remaining_balance) VALUES (?, ?, ?)";
@@ -54,13 +53,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("idd", $loan_id, $payment_amount, $remaining_balance);
 
         if ($stmt->execute()) {
+            // Update loan status if fully paid
+            if ($remaining_balance <= 0) {
+                $sql = "UPDATE loan_applications SET status = 'Paid' WHERE loan_id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $loan_id);
+                $stmt->execute();
+            }
+
             $successMessage = "Payment made successfully.";
         } else {
             $errors[] = "Failed to make payment.";
         }
 
-        $stmt->close();
-        $conn->close();
+
     }
 }
 ?>
