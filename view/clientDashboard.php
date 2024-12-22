@@ -84,7 +84,7 @@ include '../controller/notificationsController.php';
                     <td><?php echo htmlspecialchars($loan['updated_at']); ?></td>
                     <td>
                         <?php if ($loan['status'] == 'Pending'): ?>
-                        <a href="../controller/deleteLoanController.php?loan_id=<?php echo $loan['loan_id']; ?>" class="btn btn-danger">Delete</a>
+                        <a href="../controller/deleteClientLoanController.php?loan_id=<?php echo $loan['loan_id']; ?>" class="btn btn-danger">Delete</a>
                         <?php elseif ($loan['status'] == 'Approved'): ?>
                         <a href="makePayment.php?loan_id=<?php echo $loan['loan_id']; ?>" class="btn btn-success">Make Payment</a>
                         <?php endif; ?>
