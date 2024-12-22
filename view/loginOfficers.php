@@ -17,7 +17,7 @@ $errors = include '../controller/loginOfficersController.php';
 
     <div class="container p-4 rounded-3 text-light row">
         <div class="col-sm-12 col-md-6 ">
-        <h2>Officers Login</h2>
+        <h2 class="mb-5">Officers Login</h2>
         <?php
         if (!empty($errors)) {
             foreach ($errors as $error) {
