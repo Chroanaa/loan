@@ -53,8 +53,16 @@ if (isset($_POST["login"])) {
                         }
                     }
 
-                    // Redirect to client dashboard
-                    header("Location: clientDashboard.php");
+                    // Redirect based on role
+                    if ($row['role'] == 'lo') {
+                        header("Location: loanOfficersDashboard.php");
+                    } elseif ($row['role'] == 'admin') {
+                        header("Location: adminDashboard.php");
+                    } elseif ($row['role'] == 'bm') {
+                        header("Location: branchManagersDashboard.php");
+                    } else {
+                        header("Location: loginOfficers.php");
+                    }
                     exit();
                 } else {
                     $errors[] = "Incorrect password.";
@@ -90,8 +98,16 @@ if (isset($_COOKIE["remember_me"])) {
             $_SESSION['name'] = $row['name'];
             $_SESSION['show_modal'] = true;
             
-            // Redirect to client dashboard
-            header("Location: clientDashboard.php");
+            // Redirect based on role
+            if ($row['role'] == 'lo') {
+                header("Location: loanOfficersDashboard.php");
+            } elseif ($row['role'] == 'admin') {
+                header("Location: adminDashboard.php");
+            } elseif ($row['role'] == 'bm') {
+                header("Location: branchManagersDashboard.php");
+            } else {
+                header("Location: loginOfficers.php");
+            }
             exit();
         }
     }
