@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2024 at 08:31 AM
+-- Generation Time: Dec 22, 2024 at 09:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,6 +53,14 @@ CREATE TABLE `loan_applications` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `loan_applications`
+--
+
+INSERT INTO `loan_applications` (`loan_id`, `client_id`, `loan_amount`, `loan_term`, `interest_rate`, `status`, `created_at`, `updated_at`) VALUES
+(3, 2, 323.00, 23232, 32.00, 'Approved', '2024-12-22 08:24:23', '2024-12-22 08:35:14'),
+(4, 2, 323.00, 2323, 232.00, 'Pending', '2024-12-22 08:38:25', '2024-12-22 08:38:25');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +89,15 @@ CREATE TABLE `notifications` (
   `notification_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `is_read` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`notification_id`, `client_id`, `notification_type`, `message`, `notification_date`, `is_read`) VALUES
+(1, 2, 'Payment Reminder', 'Your payment is due soon.', '2024-12-22 08:50:58', 0),
+(2, 2, 'Loan Status Update', 'Your loan application has been approved.', '2024-12-22 08:50:58', 0),
+(3, 2, 'Overdue Reminder', 'Your payment is overdue.', '2024-12-22 08:50:58', 0);
 
 -- --------------------------------------------------------
 
@@ -194,7 +211,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `loan_repayments`
@@ -206,7 +223,7 @@ ALTER TABLE `loan_repayments`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
