@@ -1,39 +1,25 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'client') {
-    header("Location: ../view/login.php");
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'lo') {
+    header("Location: login.php");
     exit();
 }
 
-if (!isset($_GET['loan_id'])) {
-    header("Location: ../view/clientDashboard.php");
+if (!isset($_GET['loan_id']) || !isset($_GET['client_id'])) {
+    header("Location: loanOfficersManageClients.php");
     exit();
 }
-
-// Connect to the database
-require "../model/db.php";
 
 $loan_id = $_GET['loan_id'];
-$user_id = $_SESSION['user_id'];
-
-$sql = "SELECT * FROM loan_applications WHERE loan_id = ? AND client_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ii", $loan_id, $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$loan = $result->fetch_assoc();
-
-$stmt->close();
-
-if (!$loan || $loan['status'] != 'Approved') {
-    header("Location: ../view/clientDashboard.php");
-    exit();
-}
+$client_id = $_GET['client_id'];
 
 $errors = [];
 $successMessage = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Connect to the database
+    require_once "../model/db.php";
+
     $payment_amount = $_POST['payment_amount'];
 
     if (empty($payment_amount)) {
@@ -41,11 +27,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        // Calculate remaining balance
-        $remaining_balance = $loan['loan_amount'] - $payment_amount;
+        // Calculate total payments made so far
+        $sql = "SELECT SUM(payment_amount) AS total_paid FROM loan_repayments WHERE loan_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $loan_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $total_paid = $result->fetch_assoc()['total_paid'];
+        $stmt->close();
 
-        // Connect to the database
-        require_once "../model/db.php";
+        // Calculate remaining balance
+        $remaining_balance = $loan['loan_amount'] - ($total_paid + $payment_amount);
 
         // Insert payment into the database
         $sql = "INSERT INTO loan_repayments (loan_id, payment_amount, remaining_balance) VALUES (?, ?, ?)";
@@ -61,12 +53,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->execute();
             }
 
+            // Fetch client ID
+            $client_id = $loan['client_id'];
+
+            // Insert notification for payment
+            $message = "A payment of $payment_amount has been made for your loan with ID $loan_id.";
+            $sql = "INSERT INTO notifications (client_id, notification_type, message) VALUES (?, 'Payment Reminder', ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("is", $client_id, $message);
+            $stmt->execute();
+            $stmt->close();
+
             $successMessage = "Payment made successfully.";
         } else {
             $errors[] = "Failed to make payment.";
         }
 
-
+        $stmt->close();
+        $conn->close();
     }
 }
 ?>

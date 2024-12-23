@@ -14,22 +14,17 @@ if (!isset($_GET['loan_id'])) {
 require_once "../model/db.php";
 
 $loan_id = $_GET['loan_id'];
-$user_id = $_SESSION['user_id'];
+$client_id = $_SESSION['user_id'];
 
-// Check if the loan application is pending and belongs to the logged-in user
-$sql = "SELECT * FROM loan_applications WHERE loan_id = ? AND client_id = ? AND status = 'Pending'";
+// Delete loan application
+$sql = "DELETE FROM loan_applications WHERE loan_id = ? AND client_id = ? AND status = 'Pending'";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ii", $loan_id, $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$loan = $result->fetch_assoc();
+$stmt->bind_param("ii", $loan_id, $client_id);
 
-if ($loan) {
-    // Delete the loan application
-    $sql = "DELETE FROM loan_applications WHERE loan_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $loan_id);
-    $stmt->execute();
+if ($stmt->execute()) {
+    $_SESSION['success'] = "Loan application deleted successfully.";
+} else {
+    $_SESSION['errors'] = ["Failed to delete loan application."];
 }
 
 $stmt->close();

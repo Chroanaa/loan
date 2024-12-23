@@ -10,21 +10,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userData = $_SESSION["user_data"]; // Get user data stored in session
 
         // Insert user data into the database
-        $sql = "INSERT INTO user_tbl (name, address, contact, role, username, email, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO user_tbl (name, address, contact, role, username, email, password, branch_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($conn);
         $preparestmt = mysqli_stmt_prepare($stmt, $sql);
 
         if ($preparestmt) {
             mysqli_stmt_bind_param(
                 $stmt,
-                "sssssss",
+                "sssssssi",
                 $userData["name"],
                 $userData["address"],
                 $userData["contact"],
                 $userData["role"],
                 $userData["username"],
                 $userData["email"],
-                $userData["passwordHash"]
+                $userData["passwordHash"],
+                $userData["branch_id"],
             );
             mysqli_stmt_execute($stmt);
 

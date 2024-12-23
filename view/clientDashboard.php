@@ -27,10 +27,18 @@ $stmt->execute();
 $result = $stmt->get_result();
 $repayments = $result->fetch_all(MYSQLI_ASSOC);
 
+$stmt->close();
 
+// Fetch unread notifications count
+$sql = "SELECT COUNT(*) AS unread_count FROM notifications WHERE client_id = ? AND is_read = 0";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$unread_count = $result->fetch_assoc()['unread_count'];
 
-// Include notifications
-include '../controller/notificationsController.php';
+$stmt->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -47,18 +55,22 @@ include '../controller/notificationsController.php';
     <div class="container mt-5">
         <h2>Welcome to the Client Dashboard</h2>
         
-        <h3 class="mt-4">Your Notifications</h3>
-        <ul class="list-group mb-4">
-            <?php foreach ($notifications as $notification): ?>
-            <li class="list-group-item <?php echo $notification['is_read'] ? 'list-group-item-secondary' : 'list-group-item-primary'; ?>">
-                <?php echo htmlspecialchars($notification['message']); ?>
-                <span class="badge bg-secondary"><?php echo htmlspecialchars($notification['notification_type']); ?></span>
-                <span class="badge bg-light text-dark"><?php echo htmlspecialchars($notification['notification_date']); ?></span>
-            </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php if (!empty($_SESSION['success'])): ?>
+            <div class="alert alert-success">
+                <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (!empty($_SESSION['errors'])): ?>
+            <div class="alert alert-danger">
+                <?php foreach ($_SESSION['errors'] as $error): ?>
+                    <p><?php echo $error; ?></p>
+                <?php endforeach; unset($_SESSION['errors']); ?>
+            </div>
+        <?php endif; ?>
 
-        <h3>Your Loan Applications</h3>
+
+        <h3 class="mt-4">Your Loan Applications</h3>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -85,8 +97,6 @@ include '../controller/notificationsController.php';
                     <td>
                         <?php if ($loan['status'] == 'Pending'): ?>
                         <a href="../controller/deleteClientLoanController.php?loan_id=<?php echo $loan['loan_id']; ?>" class="btn btn-danger">Delete</a>
-                        <?php elseif ($loan['status'] == 'Approved'): ?>
-                        <a href="makePayment.php?loan_id=<?php echo $loan['loan_id']; ?>" class="btn btn-success">Make Payment</a>
                         <?php endif; ?>
                     </td>
                 </tr>

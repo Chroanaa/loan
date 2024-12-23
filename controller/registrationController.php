@@ -20,6 +20,7 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"];
     $repeatPassword = $_POST["repeat_password"];
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    $branch_id = $_POST['branch_id'];
     $errors = array();
 
     // Validation
@@ -69,6 +70,7 @@ if (isset($_POST["submit"])) {
             "username" => $username,
             "email" => $email,
             "passwordHash" => $passwordHash,
+            "branch_id" => $branch_id,
         ];
 
         // Send OTP email using PHPMailer

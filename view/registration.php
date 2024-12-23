@@ -47,6 +47,16 @@ include '../controller/registrationController.php';
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3">
+                <label for="branch_id" class="form-label">Branch</label>
+                <select class="form-control" id="branch_id" name="branch_id" required>
+                    <option value="1">OnePuhunan North Caloocan 01</option>
+                    <option value="2">OnePuhunan Cainta</option>
+                    <option value="3">OnePuhunan Las Piñas</option>
+                    <option value="4">OnePuhunan North Caloocan 02</option>
+                    <option value="5">OnePuhunan Mandaue</option>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
