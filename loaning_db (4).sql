@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2024 at 10:31 AM
+-- Generation Time: Dec 23, 2024 at 05:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,6 +36,17 @@ CREATE TABLE `branches` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `branches`
+--
+
+INSERT INTO `branches` (`branch_id`, `branch_name`, `branch_address`, `branch_contact`, `branch_email`, `created_at`) VALUES
+(1, 'OnePuhunan North Caloocan 01', 'Q22W+22R, Zabarte Rd, Novaliches, Quezon City, Metro Manila', '123-456-7890', 'northcaloocan01@example.com', '2024-12-23 04:00:00'),
+(2, 'OnePuhunan Cainta', 'H4GC+Q6F, A. Bonifacio Corner Espiritu Drive, Cainta, 1900 Rizal', '987-654-3210', 'cainta@example.com', '2024-12-23 04:00:00'),
+(3, 'OnePuhunan Las Piñas', '354, 1747 Alabang–Zapote Rd, Las Piñas, Metro Manila', '456-789-0123', 'laspinas@example.com', '2024-12-23 04:00:00'),
+(4, 'OnePuhunan North Caloocan 02', 'Q3C2+9J, Caloocan, Metro Manila', '321-654-0987', 'northcaloocan02@example.com', '2024-12-23 04:00:00'),
+(5, 'OnePuhunan Mandaue', '8WGH+PJM, Lopez Jaena St, Mandaue City, Cebu', '789-012-3456', 'mandaue@example.com', '2024-12-23 04:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -58,8 +69,11 @@ CREATE TABLE `loan_applications` (
 --
 
 INSERT INTO `loan_applications` (`loan_id`, `client_id`, `loan_amount`, `loan_term`, `interest_rate`, `status`, `created_at`, `updated_at`) VALUES
-(3, 2, 323.00, 23232, 32.00, 'Paid', '2024-12-22 08:24:23', '2024-12-22 09:18:10'),
-(4, 2, 323.00, 2323, 232.00, 'Approved', '2024-12-22 08:38:25', '2024-12-22 09:23:40');
+(6, 5, 213.00, -1, 321.00, 'Approved', '2024-12-23 02:51:53', '2024-12-23 04:56:38'),
+(7, 5, 231.00, 3213, 213.00, 'Paid', '2024-12-23 03:28:57', '2024-12-23 04:56:16'),
+(8, 5, 321.00, 321313, 999.99, 'Approved', '2024-12-23 03:44:44', '2024-12-23 04:51:35'),
+(10, 5, 321321.00, 321321, 321.00, 'Rejected', '2024-12-23 03:44:48', '2024-12-23 03:55:23'),
+(11, 5, 12.00, 32321, 321.00, 'Pending', '2024-12-23 04:25:38', '2024-12-23 04:25:38');
 
 -- --------------------------------------------------------
 
@@ -80,7 +94,18 @@ CREATE TABLE `loan_repayments` (
 --
 
 INSERT INTO `loan_repayments` (`repayment_id`, `loan_id`, `payment_amount`, `payment_date`, `remaining_balance`) VALUES
-(2, 3, 5000.00, '2024-12-22 09:18:10', -4677.00);
+(3, 6, 321.00, '2024-12-23 03:22:04', -108.00),
+(4, 7, 3232.00, '2024-12-23 03:43:48', -3001.00),
+(11, 8, 323232.00, '2024-12-23 03:58:47', -322911.00),
+(12, 6, 323232.00, '2024-12-23 04:49:37', -323553.00),
+(13, 6, 3232.00, '2024-12-23 04:50:27', -326785.00),
+(14, 6, 3232.00, '2024-12-23 04:52:31', -329804.00),
+(15, 6, 3232.00, '2024-12-23 04:52:58', -333036.00),
+(16, 6, 3232.00, '2024-12-23 04:54:40', -336268.00),
+(17, 6, 3232.00, '2024-12-23 04:54:43', -339500.00),
+(18, 6, 3232.00, '2024-12-23 04:55:16', -342732.00),
+(19, 6, 3232.00, '2024-12-23 04:55:21', -345964.00),
+(20, 7, 3232.00, '2024-12-23 04:56:16', -6233.00);
 
 -- --------------------------------------------------------
 
@@ -102,9 +127,20 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`notification_id`, `client_id`, `notification_type`, `message`, `notification_date`, `is_read`) VALUES
-(1, 2, 'Payment Reminder', 'Your payment is due soon.', '2024-12-22 08:50:58', 1),
-(2, 2, 'Loan Status Update', 'Your loan application has been approved.', '2024-12-22 08:50:58', 1),
-(3, 2, 'Overdue Reminder', 'Your payment is overdue.', '2024-12-22 08:50:58', 1);
+(4, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 7.', '2024-12-23 03:43:48', 1),
+(5, 5, 'Loan Status Update', 'Your loan application with ID 8 has been approved.', '2024-12-23 03:49:10', 1),
+(13, 5, 'Loan Status Update', 'Your loan application with ID 10 has been rejected.', '2024-12-23 03:55:23', 1),
+(15, 5, 'Loan Status Update', 'Your loan application with ID 9 has been deleted.', '2024-12-23 03:59:47', 1),
+(20, 5, 'Overdue Reminder', 'Dear Kim F. Gamot, your loan with ID 6 is overdue. Please make a payment as soon as possible.', '2024-12-23 04:24:43', 1),
+(21, 5, 'Overdue Reminder', 'Dear Kim F. Gamot, your loan with ID 6 is overdue. Please make a payment as soon as possible.', '2024-12-23 04:37:37', 1),
+(22, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:52:31', 1),
+(23, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:52:58', 1),
+(24, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:54:40', 1),
+(25, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:54:43', 1),
+(26, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:55:16', 1),
+(27, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:55:21', 1),
+(28, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 7.', '2024-12-23 04:56:16', 1),
+(29, 5, 'Overdue Reminder', 'Dear Kim F. Gamot, your loan with ID 6 is overdue. Please make a payment as soon as possible.', '2024-12-23 04:56:42', 1);
 
 -- --------------------------------------------------------
 
@@ -119,13 +155,6 @@ CREATE TABLE `password_resets` (
   `expires` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `password_resets`
---
-
-INSERT INTO `password_resets` (`id`, `email`, `token`, `expires`, `created_at`) VALUES
-(4, 'gamot.kim.fernandez@gmail.com', '9aa7e9fc2f270fb94085dc8f43c5ce0b781d33551ffff2a16bd2108aee39c0d2cadb4dcee0a3a0e5db142e90af0b970f7c17', 1734845030, '2024-12-22 04:23:50');
 
 -- --------------------------------------------------------
 
@@ -155,8 +184,9 @@ CREATE TABLE `user_tbl` (
 --
 
 INSERT INTO `user_tbl` (`user_id`, `name`, `address`, `contact`, `role`, `username`, `email`, `password`, `repeat_password`, `created_at`, `remember_token`, `reset_token`, `reset_expires`, `branch_id`) VALUES
-(2, 'Kim F. Gamot', '233232', '09263627274', 'client', 'admin', 'gamot.kim.fernandez@gmail.com', '$2y$10$6vMtlETpfjyrGonJgzO8.eG7TdgMZigjb9s1Ay6Wvg2wA85gk1F8q', '', '2024-12-22 03:21:23', 'd5eb15e67fb8d18374bf1c1363e21d16d04d1a33bd53a33c0e42fd53dae73616331728e6e7da7855764db8ca6cbaae711a7f93652bcdef1f2f39e025d1cb41ef', NULL, NULL, NULL),
-(3, 'Duplication', '323232', '09263627273', 'admin', 'kimkim021', 'gamotkim96@gmail.com', '$2y$10$zUdmFVvNGri16Io2JAUxeeMxhPW41/tDl17VH4lIwZx0TROLh6lZq', '', '2024-12-22 03:24:35', '556a05dae031b8f29a2bfa70549c461006afcc1b85c1201bcd92e35ab01386957cb3326ae9e6c0e02c331d3d732099ede53f4414e803a88ba3678d65bb5c7965', NULL, NULL, NULL);
+(3, 'Duplication', '323232', '09263627273', 'admin', 'kimkim021', 'gamotkim96@gmail.com', '$2y$10$zUdmFVvNGri16Io2JAUxeeMxhPW41/tDl17VH4lIwZx0TROLh6lZq', '', '2024-12-22 03:24:35', '556a05dae031b8f29a2bfa70549c461006afcc1b85c1201bcd92e35ab01386957cb3326ae9e6c0e02c331d3d732099ede53f4414e803a88ba3678d65bb5c7965', NULL, NULL, NULL),
+(5, 'Kim F. Gamot', '32132', '09263627271', 'client', 'kim', 'gamot.kim.fernandez@gmail.com', '$2y$10$P4dhAkQ5BMYLq5ZsJpnx4uAgGuW1H5jS8WVlGdO41kcT1xkEvIpoC', '', '2024-12-23 02:50:03', NULL, NULL, NULL, 3),
+(7, 'Kim F. Gamot', '32132', '09263627271', 'lo', 'kim1', 'gamot.kim.fernandez@gmail.com1', '$2y$10$P4dhAkQ5BMYLq5ZsJpnx4uAgGuW1H5jS8WVlGdO41kcT1xkEvIpoC', '', '2024-12-23 02:50:03', NULL, NULL, NULL, 2);
 
 --
 -- Indexes for dumped tables
@@ -212,25 +242,25 @@ ALTER TABLE `user_tbl`
 -- AUTO_INCREMENT for table `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `branch_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `branch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `loan_repayments`
 --
 ALTER TABLE `loan_repayments`
-  MODIFY `repayment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `repayment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -242,7 +272,7 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
