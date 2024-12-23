@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2024 at 05:58 AM
+-- Generation Time: Dec 23, 2024 at 01:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -69,11 +69,10 @@ CREATE TABLE `loan_applications` (
 --
 
 INSERT INTO `loan_applications` (`loan_id`, `client_id`, `loan_amount`, `loan_term`, `interest_rate`, `status`, `created_at`, `updated_at`) VALUES
-(6, 5, 213.00, -1, 321.00, 'Approved', '2024-12-23 02:51:53', '2024-12-23 04:56:38'),
-(7, 5, 231.00, 3213, 213.00, 'Paid', '2024-12-23 03:28:57', '2024-12-23 04:56:16'),
-(8, 5, 321.00, 321313, 999.99, 'Approved', '2024-12-23 03:44:44', '2024-12-23 04:51:35'),
-(10, 5, 321321.00, 321321, 321.00, 'Rejected', '2024-12-23 03:44:48', '2024-12-23 03:55:23'),
-(11, 5, 12.00, 32321, 321.00, 'Pending', '2024-12-23 04:25:38', '2024-12-23 04:25:38');
+(17, 27, 2313.00, -1, 999.99, 'Pending', '2024-12-23 12:02:42', '2024-12-23 12:02:42'),
+(18, 27, 32131.00, 321321, 231.00, 'Pending', '2024-12-23 12:02:44', '2024-12-23 12:02:44'),
+(19, 27, 3213.00, 13131, 999.99, 'Pending', '2024-12-23 12:02:46', '2024-12-23 12:02:46'),
+(20, 26, 10000.00, 12, 10.00, 'Paid', '2024-12-23 12:08:57', '2024-12-23 12:09:45');
 
 -- --------------------------------------------------------
 
@@ -94,18 +93,7 @@ CREATE TABLE `loan_repayments` (
 --
 
 INSERT INTO `loan_repayments` (`repayment_id`, `loan_id`, `payment_amount`, `payment_date`, `remaining_balance`) VALUES
-(3, 6, 321.00, '2024-12-23 03:22:04', -108.00),
-(4, 7, 3232.00, '2024-12-23 03:43:48', -3001.00),
-(11, 8, 323232.00, '2024-12-23 03:58:47', -322911.00),
-(12, 6, 323232.00, '2024-12-23 04:49:37', -323553.00),
-(13, 6, 3232.00, '2024-12-23 04:50:27', -326785.00),
-(14, 6, 3232.00, '2024-12-23 04:52:31', -329804.00),
-(15, 6, 3232.00, '2024-12-23 04:52:58', -333036.00),
-(16, 6, 3232.00, '2024-12-23 04:54:40', -336268.00),
-(17, 6, 3232.00, '2024-12-23 04:54:43', -339500.00),
-(18, 6, 3232.00, '2024-12-23 04:55:16', -342732.00),
-(19, 6, 3232.00, '2024-12-23 04:55:21', -345964.00),
-(20, 7, 3232.00, '2024-12-23 04:56:16', -6233.00);
+(22, 20, 10000.00, '2024-12-23 12:09:45', 0.00);
 
 -- --------------------------------------------------------
 
@@ -127,20 +115,13 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`notification_id`, `client_id`, `notification_type`, `message`, `notification_date`, `is_read`) VALUES
-(4, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 7.', '2024-12-23 03:43:48', 1),
-(5, 5, 'Loan Status Update', 'Your loan application with ID 8 has been approved.', '2024-12-23 03:49:10', 1),
-(13, 5, 'Loan Status Update', 'Your loan application with ID 10 has been rejected.', '2024-12-23 03:55:23', 1),
-(15, 5, 'Loan Status Update', 'Your loan application with ID 9 has been deleted.', '2024-12-23 03:59:47', 1),
-(20, 5, 'Overdue Reminder', 'Dear Kim F. Gamot, your loan with ID 6 is overdue. Please make a payment as soon as possible.', '2024-12-23 04:24:43', 1),
-(21, 5, 'Overdue Reminder', 'Dear Kim F. Gamot, your loan with ID 6 is overdue. Please make a payment as soon as possible.', '2024-12-23 04:37:37', 1),
-(22, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:52:31', 1),
-(23, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:52:58', 1),
-(24, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:54:40', 1),
-(25, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:54:43', 1),
-(26, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:55:16', 1),
-(27, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 6.', '2024-12-23 04:55:21', 1),
-(28, 5, 'Payment Reminder', 'A payment of 3232 has been made for your loan with ID 7.', '2024-12-23 04:56:16', 1),
-(29, 5, 'Overdue Reminder', 'Dear Kim F. Gamot, your loan with ID 6 is overdue. Please make a payment as soon as possible.', '2024-12-23 04:56:42', 1);
+(34, 26, 'Loan Status Update', 'Your loan application with ID 14 has been approved.', '2024-12-23 11:21:47', 1),
+(35, 26, 'Payment Reminder', 'A payment of 2000 has been made for your loan with ID 14.', '2024-12-23 11:36:51', 1),
+(36, 26, 'Loan Status Update', 'Your loan application with ID 16 has been approved.', '2024-12-23 11:40:34', 1),
+(37, 26, 'Loan Status Update', 'Your loan application with ID 14 has been deleted.', '2024-12-23 12:04:20', 1),
+(38, 26, 'Loan Status Update', 'Your loan application with ID 16 has been deleted.', '2024-12-23 12:08:24', 1),
+(39, 26, 'Loan Status Update', 'Your loan application with ID 20 has been approved.', '2024-12-23 12:09:34', 0),
+(40, 26, 'Payment Reminder', 'A payment of 10000 has been made for your loan with ID 20.', '2024-12-23 12:09:45', 0);
 
 -- --------------------------------------------------------
 
@@ -184,9 +165,11 @@ CREATE TABLE `user_tbl` (
 --
 
 INSERT INTO `user_tbl` (`user_id`, `name`, `address`, `contact`, `role`, `username`, `email`, `password`, `repeat_password`, `created_at`, `remember_token`, `reset_token`, `reset_expires`, `branch_id`) VALUES
-(3, 'Duplication', '323232', '09263627273', 'admin', 'kimkim021', 'gamotkim96@gmail.com', '$2y$10$zUdmFVvNGri16Io2JAUxeeMxhPW41/tDl17VH4lIwZx0TROLh6lZq', '', '2024-12-22 03:24:35', '556a05dae031b8f29a2bfa70549c461006afcc1b85c1201bcd92e35ab01386957cb3326ae9e6c0e02c331d3d732099ede53f4414e803a88ba3678d65bb5c7965', NULL, NULL, NULL),
-(5, 'Kim F. Gamot', '32132', '09263627271', 'client', 'kim', 'gamot.kim.fernandez@gmail.com', '$2y$10$P4dhAkQ5BMYLq5ZsJpnx4uAgGuW1H5jS8WVlGdO41kcT1xkEvIpoC', '', '2024-12-23 02:50:03', NULL, NULL, NULL, 3),
-(7, 'Kim F. Gamot', '32132', '09263627271', 'lo', 'kim1', 'gamot.kim.fernandez@gmail.com1', '$2y$10$P4dhAkQ5BMYLq5ZsJpnx4uAgGuW1H5jS8WVlGdO41kcT1xkEvIpoC', '', '2024-12-23 02:50:03', NULL, NULL, NULL, 2);
+(12, 'admin', '32132', '09263627271', 'admin', 'admin', 'admin@gmail.com', '$2y$10$P4dhAkQ5BMYLq5ZsJpnx4uAgGuW1H5jS8WVlGdO41kcT1xkEvIpoC', '', '2024-12-23 02:50:03', NULL, NULL, NULL, NULL),
+(24, 'Loan Officer Example', NULL, NULL, 'lo', 'loanofficer', 'loanofficer@gmail.com', '$2y$10$tn2wqfrCFErGo9IDnVLYue1x.BeGg/pnGNgAiuuEBqmobiX./Jm0K', '', '2024-12-23 11:14:18', NULL, NULL, NULL, 1),
+(25, 'Branch Manager Example', NULL, NULL, 'bm', 'branchmanager', 'branchmanager@gmail.com', '$2y$10$tCMdmhR09TCTG8eY8u6aqe7f8FIMPr216TAzre5/VATPGakIkJRcK', '', '2024-12-23 11:15:31', NULL, NULL, NULL, 1),
+(26, 'Kim F. Gamot', 'Dakila St. Batasan Hills Quezon City', '09263627274', 'client', 'duplicationph', 'gamot.kim.fernandez@gmail.com', '$2y$10$7DGzrt7IhXrzD0x7qoFu6ejlG/xS.OhtLI1KPVkPiAY0uNYjfCroO', '', '2024-12-23 11:19:43', NULL, NULL, NULL, 1),
+(27, 'client2', 'dakila', '09263627271', 'client', 'client2', 'gamotkim96@gmail.com', '$2y$10$f5ymDMvdYMJPsnv4EoaKVOQdQ356nvavHcOJZGiCCUXE3Z7S8XKl6', '', '2024-12-23 12:02:30', NULL, NULL, NULL, 2);
 
 --
 -- Indexes for dumped tables
@@ -248,19 +231,19 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `loan_repayments`
 --
 ALTER TABLE `loan_repayments`
-  MODIFY `repayment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `repayment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -272,7 +255,7 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
