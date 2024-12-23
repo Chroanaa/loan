@@ -8,18 +8,42 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'lo') {
 // Connect to the database
 require_once "../model/db.php";
 
-// Fetch all loan applications with branch names
+// Fetch loan officer's branch ID
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT branch_id FROM user_tbl WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$loan_officer = $result->fetch_assoc();
+$branch_id = $loan_officer['branch_id'];
+$stmt->close();
+
+// Fetch all loan applications with branch names for the loan officer's branch
 $sql = "SELECT l.loan_id, l.client_id, l.loan_amount, l.loan_term, l.interest_rate, l.status, l.created_at, l.updated_at, b.branch_name 
         FROM loan_applications l
         JOIN user_tbl u ON l.client_id = u.user_id
-        JOIN branches b ON u.branch_id = b.branch_id";
-$result = $conn->query($sql);
+        JOIN branches b ON u.branch_id = b.branch_id
+        WHERE u.branch_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $branch_id);
+$stmt->execute();
+$result = $stmt->get_result();
 $loans = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 
-// Fetch all loan repayments
-$sql = "SELECT * FROM loan_repayments";
-$result = $conn->query($sql);
+// Fetch all loan repayments for the loan officer's branch
+$sql = "SELECT lr.repayment_id, lr.loan_id, lr.payment_amount, lr.payment_date, lr.remaining_balance
+        FROM loan_repayments lr
+        JOIN loan_applications l ON lr.loan_id = l.loan_id
+        JOIN user_tbl u ON l.client_id = u.user_id
+        WHERE u.branch_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $branch_id);
+$stmt->execute();
+$result = $stmt->get_result();
 $repayments = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 
 $conn->close();
 ?>

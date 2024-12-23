@@ -8,13 +8,28 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'lo') {
 // Connect to the database
 require_once "../model/db.php";
 
-// Fetch all clients with branch names
+// Fetch loan officer's branch ID
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT branch_id FROM user_tbl WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$loan_officer = $result->fetch_assoc();
+$branch_id = $loan_officer['branch_id'];
+$stmt->close();
+
+// Fetch all clients with branch names for the loan officer's branch
 $sql = "SELECT u.user_id, u.name, u.email, b.branch_name 
         FROM user_tbl u 
         JOIN branches b ON u.branch_id = b.branch_id 
-        WHERE u.role = 'client'";
-$result = $conn->query($sql);
+        WHERE u.role = 'client' AND u.branch_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $branch_id);
+$stmt->execute();
+$result = $stmt->get_result();
 $clients = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 
 $conn->close();
 ?>
@@ -57,6 +72,7 @@ $conn->close();
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <a href="loanOfficersDashboard.php" class="btn btn-secondary">Back to Dashboard</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>

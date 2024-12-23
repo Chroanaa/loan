@@ -1,16 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'lo') {
-    header("Location: ../view/login.php");
+    header("Location: login.php");
     exit();
 }
 
-if (!isset($_GET['loan_id']) || !isset($_GET['client_id'])) {
-    header("Location: ../view/loanOfficersManageClients.php");
-    exit();
-}
-
-// Connect to the database
 require_once "../model/db.php";
 
 $loan_id = $_GET['loan_id'];

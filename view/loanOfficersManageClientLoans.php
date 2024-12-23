@@ -1,12 +1,7 @@
-<?php 
+<?php
 session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'lo') {
     header("Location: login.php");
-    exit();
-}
-
-if (!isset($_GET['client_id'])) {
-    header("Location: loanOfficersManageClients.php");
     exit();
 }
 
@@ -14,14 +9,16 @@ if (!isset($_GET['client_id'])) {
 require_once "../model/db.php";
 
 $client_id = $_GET['client_id'];
+
+// Fetch client loans
 $sql = "SELECT * FROM loan_applications WHERE client_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $client_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $loans = $result->fetch_all(MYSQLI_ASSOC);
-
 $stmt->close();
+
 $conn->close();
 ?>
 
@@ -38,6 +35,27 @@ $conn->close();
     <?php include 'components/navbarLoanOfficer.php'; ?>
     <div class="container mt-5">
         <h2>Manage Client Loans</h2>
+
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success">
+                <?php 
+                echo $_SESSION['success']; 
+                unset($_SESSION['success']); // Clear the message after displaying it
+                ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['errors'])): ?>
+            <div class="alert alert-danger">
+                <?php 
+                foreach ($_SESSION['errors'] as $error) {
+                    echo $error . "<br>";
+                }
+                unset($_SESSION['errors']); // Clear the errors after displaying them
+                ?>
+            </div>
+        <?php endif; ?>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -75,7 +93,6 @@ $conn->close();
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="loanOfficersManageClients.php" class="btn btn-secondary">Back to Manage Clients</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>

@@ -34,6 +34,7 @@ if (isset($_POST["login"])) {
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['role'] = $row['role'];
                     $_SESSION['name'] = $row['name'];
+                    $_SESSION['branch_id'] = $row['branch_id'];
                     $_SESSION['show_modal'] = true;
                     
                     // If "Remember Me" is checked
@@ -96,6 +97,7 @@ if (isset($_COOKIE["remember_me"])) {
             $_SESSION['email'] = $row['email'];
             $_SESSION['role'] = $row['role'];
             $_SESSION['name'] = $row['name'];
+            $_SESSION['branch_id'] = $row['branch_id'];
             $_SESSION['show_modal'] = true;
             
             // Redirect based on role
