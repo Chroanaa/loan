@@ -29,7 +29,7 @@ $conn->close();
 </head>
 <body>
     <?php include 'components/navbarAdmin.php'; ?>
-    <div class="container mt-5">
+    <div class="container shadow-sm table-responsive border rounded-3 p-5 mt-5">
         <h2>Notifications</h2>
         <table class="table table-bordered">
             <thead>

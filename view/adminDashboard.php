@@ -45,110 +45,173 @@ $conn->close();
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
+
+
+
 </head>
+<style>
+    * {
+        font-family: 'Roboto', sans-serif;
+    }
+    body {
+        min-width: 857px;
+    }
+</style>
 <body>
     <?php include 'components/navbarAdmin.php'; ?>
-    <div class="container mt-5">
+    <div class="container-fluid px-5 mt-5">
+
+    <div class="container-fluid d-flex justify-content-around align-items-center mt-3 flex-wrap">
         <h2>Welcome to the Admin Dashboard</h2>
 
-        <h3 class="mt-4">Loan Applications</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Loan ID</th>
-                    <th>Client Name</th>
-                    <th>Amount</th>
-                    <th>Term (months)</th>
-                    <th>Interest Rate (%)</th>
-                    <th>Status</th>
-                    <th>Branch</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($loans as $loan): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($loan['loan_id']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['client_name']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['loan_amount']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['loan_term']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['interest_rate']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['status']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['branch_name']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['created_at']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['updated_at']); ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="box">
+            
+            <h3 class="mt-4">Generate Reports</h3>
+                <a href="adminGenerateWeekly.php" class="btn btn-primary">Generate Weekly Report</a>
+                <a href="adminGenerateMonthly.php" class="btn btn-primary">Generate Monthly Report</a>
+                <a href="adminGenerateAnnually.php" class="btn btn-primary">Generate Annually Report</a>
+        </div>
 
-        <h3 class="mt-4">Loan Repayments</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Repayment ID</th>
-                    <th>Loan ID</th>
-                    <th>Client Name</th>
-                    <th>Payment Amount</th>
-                    <th>Payment Date</th>
-                    <th>Remaining Balance</th>
-                    <th>Branch</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($repayments as $repayment): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($repayment['repayment_id']); ?></td>
-                    <td><?php echo htmlspecialchars($repayment['loan_id']); ?></td>
-                    <td><?php echo htmlspecialchars($repayment['client_name']); ?></td>
-                    <td><?php echo htmlspecialchars($repayment['payment_amount']); ?></td>
-                    <td><?php echo htmlspecialchars($repayment['payment_date']); ?></td>
-                    <td><?php echo htmlspecialchars($repayment['remaining_balance']); ?></td>
-                    <td><?php echo htmlspecialchars($repayment['branch_name']); ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        </div>
 
-        <h3 class="mt-4">Overdue Loans</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Loan ID</th>
-                    <th>Client Name</th>
-                    <th>Amount</th>
-                    <th>Term (months)</th>
-                    <th>Interest Rate (%)</th>
-                    <th>Status</th>
-                    <th>Branch</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($overdue_loans as $loan): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($loan['loan_id']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['client_name']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['loan_amount']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['loan_term']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['interest_rate']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['status']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['branch_name']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['created_at']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['updated_at']); ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="shadow-sm border container-fluid p-4 mt-3 rounded-3">
+            <h3 class="mt-4">Loan Applications</h3>
+            <table class="table table-bordered" id="loansTable">
+                <thead>
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Client Name</th>
+                        <th>Amount</th>
+                        <th>Term (months)</th>
+                        <th>Interest Rate (%)</th>
+                        <th>Status</th>
+                        <th>Branch</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($loans as $loan): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($loan['loan_id']); ?></td>
+                        <td><?php echo htmlspecialchars($loan['client_name']); ?></td>
+                        <td><?php echo htmlspecialchars($loan['loan_amount']); ?></td>
+                        <td><?php echo htmlspecialchars($loan['loan_term']); ?></td>
+                        <td><?php echo htmlspecialchars($loan['interest_rate']); ?></td>
+                        <td><?php echo htmlspecialchars($loan['status']); ?></td>
+                        <td><?php echo htmlspecialchars($loan['branch_name']); ?></td>
+                        <td><?php echo htmlspecialchars($loan['created_at']); ?></td>
+                        <td><?php echo htmlspecialchars($loan['updated_at']); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
 
-        <h3 class="mt-4">Generate Reports</h3>
-        <a href="adminGenerateWeekly.php" class="btn btn-primary">Generate Weekly Report</a>
-        <a href="adminGenerateMonthly.php" class="btn btn-primary">Generate Monthly Report</a>
-        <a href="adminGenerateAnnually.php" class="btn btn-primary">Generate Annually Report</a>
+
+        <section class="d-flex justify-content-center align-items-center" style="gap: 1rem" id="mid-section">
+
+            <div class="shadow-sm border table-responsive p-4 mt-3 rounded-3" style="flex: 1">
+                <h3 class="mt-4">Loan Repayments</h3>
+                <table class="table table-bordered" id="repaymentsTable">
+                    <thead>
+                        <tr>
+                            <th>Repayment ID</th>
+                            <th>Loan ID</th>
+                            <th>Client Name</th>
+                            <th>Payment Amount</th>
+                            <th>Payment Date</th>
+                            <th>Remaining Balance</th>
+                            <th>Branch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($repayments as $repayment): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($repayment['repayment_id']); ?></td>
+                            <td><?php echo htmlspecialchars($repayment['loan_id']); ?></td>
+                            <td><?php echo htmlspecialchars($repayment['client_name']); ?></td>
+                            <td><?php echo htmlspecialchars($repayment['payment_amount']); ?></td>
+                            <td><?php echo htmlspecialchars($repayment['payment_date']); ?></td>
+                            <td><?php echo htmlspecialchars($repayment['remaining_balance']); ?></td>
+                            <td><?php echo htmlspecialchars($repayment['branch_name']); ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="shadow-sm border table-responsive p-4 mt-3 rounded-3" style="flex: 1">
+                <h3 class="mt-4">Overdue Loans</h3>
+                    <table class="table table-bordered" id="overdueTable">
+                        <thead>
+                            <tr>
+                                <th>Loan ID</th>
+                                <th>Client Name</th>
+                                <th>Amount</th>
+                                <th>Term (months)</th>
+                                <th>Interest Rate (%)</th>
+                                <th>Status</th>
+                                <th>Branch</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($overdue_loans as $loan): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($loan['loan_id']); ?></td>
+                                <td><?php echo htmlspecialchars($loan['client_name']); ?></td>
+                                <td><?php echo htmlspecialchars($loan['loan_amount']); ?></td>
+                                <td><?php echo htmlspecialchars($loan['loan_term']); ?></td>
+                                <td><?php echo htmlspecialchars($loan['interest_rate']); ?></td>
+                                <td><?php echo htmlspecialchars($loan['status']); ?></td>
+                                <td><?php echo htmlspecialchars($loan['branch_name']); ?></td>
+                                <td><?php echo htmlspecialchars($loan['created_at']); ?></td>
+                                <td><?php echo htmlspecialchars($loan['updated_at']); ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+            </div>
+        </section>
+
+
     </div>
 
+    <footer class="p-3 mt-5 d-flex justify-content-center align-items-center" style="background-color: #002855; color: white;">
+            Developed by: Group 8
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
+
+
+    <script>
+
+        new DataTable('#loansTable', {
+            responsive: true
+        });
+        new DataTable('#repaymentsTable', {
+            responsive: true
+        });
+        new DataTable('#overdueTable', {
+            responsive: true
+        });
+
+    </script>                            
+
+
+
+
+
 </body>
 </html>
