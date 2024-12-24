@@ -75,7 +75,7 @@ $conn->close();
                 <a href="adminGenerateAnnually.php" class="btn btn-primary">Generate Annually Report</a>
         </div>
 
-        </div>
+    </div>
 
         <div class="shadow-sm border container-fluid p-4 mt-3 rounded-3">
             <h3 class="mt-4">Loan Applications</h3>
