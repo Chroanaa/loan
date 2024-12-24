@@ -11,8 +11,8 @@ $unread_count = $result->fetch_assoc()['unread_count'];
 
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color: #002855;">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #002855;">
+    <div class="container-fluid px-5 py-3">
         <a class="navbar-brand" href="clientDashboard.php">Client Dashboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -12,7 +12,7 @@ $errors = require '../controller/clientLoanController.php';
 </head>
 <body>
 <?php include 'components/navbarClient.php'; ?>
-    <div class="container mt-5">
+    <div class="container shadow-sm border rounded-3 p-5 mt-5">
         <h2>Client Loan Application</h2>
         <?php
         if (!empty($errors)) {
