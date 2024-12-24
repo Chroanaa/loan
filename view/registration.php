@@ -54,6 +54,7 @@ include '../controller/registrationController.php';
                     <option value="3">OnePuhunan Las Piñas</option>
                     <option value="4">OnePuhunan North Caloocan 02</option>
                     <option value="5">OnePuhunan Mandaue</option>
+                    <option value="6">OnePuhunan Pangasinan</option>
                 </select>
             </div>
             <div class="mb-3">
