@@ -40,7 +40,7 @@ $conn->close();
 </style>
 <body>
     <?php include 'components/navbarAdmin.php'; ?>
-    <div class="container p-5 shadow-sm rounded-3 border mt-5">
+    <div class="container p-5 shadow-sm rounded-3 border mb-5 mt-5">
         <h2>Manage Users</h2>
 
         <?php if (!empty($_SESSION['success'])): ?>

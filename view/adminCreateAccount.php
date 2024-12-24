@@ -35,7 +35,7 @@ $conn->close();
 </style>
 <body>
     <?php include 'components/navbarAdmin.php'; ?>
-    <div class="container mt-5 shadow-sm border p-5">
+    <div class="container mt-5 shadow-sm border mb-5 p-5">
         <h2>Create Account</h2>
 
         <?php if (!empty($_SESSION['success'])): ?>

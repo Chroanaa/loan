@@ -78,7 +78,7 @@ $conn->close();
 </style>
 <body>
     <?php include 'components/navbarBranchManager.php'; ?>
-    <div class="container-fluid px-5 mt-5">
+    <div class="container-fluid px-5 mb-5 mt-5">
         <div class="container-fluid d-flex justify-content-around align-items-center mt-3 flex-wrap">
         <h2>Welcome to the Branch Manager's Dashboard</h2>
 
@@ -184,9 +184,7 @@ $conn->close();
 
     </div>
 
-    <footer class="p-3 mt-5 d-flex justify-content-center align-items-center" style="background-color: #002855; color: white;">
-            Developed by: Group 8
-    </footer>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
