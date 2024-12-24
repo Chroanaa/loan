@@ -39,7 +39,7 @@ $conn->close();
 </head>
 <body>
     <?php include 'components/navbarLoanOfficer.php'; ?>
-    <div class="container mt-5">
+    <div class="container shadow-sm border rounded-3 table-responsive p-5  mt-5">
         <h2>Client Profile</h2>
         <table class="table table-bordered">
             <tr>

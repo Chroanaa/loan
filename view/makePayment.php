@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <?php include 'components/navbarLoanOfficer.php'; ?>
-    <div class="container mt-5">
+    <div class="container shadow-sm rounded-3 border p-5  mt-5 mb-5">
         <h2>Make Payment</h2>
         <?php
         if (!empty($errors)) {
