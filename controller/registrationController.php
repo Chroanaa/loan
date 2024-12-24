@@ -81,13 +81,13 @@ if (isset($_POST["submit"])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // SMTP server (e.g., Gmail)
             $mail->SMTPAuth = true;
-            $mail->Username = 'gamot.kim.fernandez@gmail.com'; // Your SMTP username (Gmail address)
-            $mail->Password = 'easu kjbc pthy btng'; // Your SMTP password (App Password for Gmail)
+            $mail->Username = 'charleneferrer525@gmail.com'; // Your SMTP username (Gmail address)
+            $mail->Password = 'zxgq zqsb eaal qxfg'; // Your SMTP password (App Password for Gmail)
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Encryption (STARTTLS)
             $mail->Port = 587; // Port for STARTTLS (465 for SSL)
 
             // Recipients
-            $mail->setFrom('gamot.kim.fernandez@gmail.com', 'Loaning Company'); // Sender email and name
+            $mail->setFrom('charleneferrer525@gmail.com', 'One Puhunan'); // Sender email and name
             $mail->addAddress($email, $name); // Recipient email and name
 
             // Email content
