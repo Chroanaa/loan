@@ -55,11 +55,13 @@ $conn->close();
     }
     body {
         min-width: 857px;
+        min-height: 100vh;
+        background: url(../wwwroot/img/hero-bg.jpg) no-repeat center / cover;
     }
 </style>
 <body>
     <?php include 'components/navbarLoanOfficer.php'; ?>
-    <div class="container shadow-sm border rounded-3 p-5 mt-5">
+    <div class="container bg-light shadow-sm border rounded-3 p-5 mt-5">
         <h2>Manage Clients</h2>
         <table class="table table-bordered" id="clientTable">
             <thead>

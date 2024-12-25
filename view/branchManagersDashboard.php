@@ -69,17 +69,19 @@ $conn->close();
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
 </head>
 <style>
-    * {
+   * {
         font-family: 'Roboto', sans-serif;
     }
     body {
         min-width: 857px;
+        min-height: 100vh;
+        background: url(../wwwroot/img/hero-bg.jpg) no-repeat center / cover;
     }
 </style>
 <body>
     <?php include 'components/navbarBranchManager.php'; ?>
     <div class="container-fluid px-5 mb-5 mt-5">
-        <div class="container-fluid d-flex justify-content-around align-items-center mt-3 flex-wrap">
+        <div class="container-fluid text-light d-flex justify-content-around align-items-center mt-3 flex-wrap">
         <h2>Welcome to the Branch Manager's Dashboard</h2>
 
         <div class="box">
@@ -91,7 +93,7 @@ $conn->close();
         </div>
 
     </div>
-        <div class="shadow-sm border container-fluid p-4 mt-3 rounded-3">
+        <div class="shadow-sm border bg-light container-fluid p-4 mt-3 rounded-3">
             <h3 class="mt-4">Loan Portfolio</h3>
                 <table class="table table-bordered" id="loansTable">
                     <thead>
@@ -126,7 +128,7 @@ $conn->close();
        
     <section class="d-flex justify-content-center align-items-center" style="gap: 1rem" id="mid-section">
 
-        <div class="shadow-sm border table-responsive p-4 mt-3 rounded-3" style="flex: 1">
+        <div class="shadow-sm border bg-light table-responsive p-4 mt-3 rounded-3" style="flex: 1">
             <h3 class="mt-4">Overdue Loans</h3>
                 <table class="table table-bordered" id="repaymentsTable">
                 <thead>
@@ -158,7 +160,7 @@ $conn->close();
             </table>
         </div>
 
-        <div class="shadow-sm border table-responsive p-4 mt-3 rounded-3" style="flex: 1">
+        <div class="shadow-sm border bg-light table-responsive p-4 mt-3 rounded-3" style="flex: 1">
             <h3 class="mt-4">Loan Officers</h3>
             <table class="table table-bordered" id="overdueTable">
             <thead>

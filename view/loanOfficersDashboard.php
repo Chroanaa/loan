@@ -69,12 +69,14 @@ $conn->close();
     }
     body {
         min-width: 857px;
+        min-height: 100vh;
+        background: url(../wwwroot/img/hero-bg.jpg) no-repeat center / cover;
     }
 </style>
 
 <body>
     <?php include 'components/navbarLoanOfficer.php'; ?>
-    <div class="container-fluid px-5 mb-5 mt-5">
+    <div class="container-fluid text-light px-5 mb-5 mt-5">
         <h2>Welcome to the Loan Officer's Dashboard</h2>
         
         <?php if (!empty($_SESSION['success'])): ?>
@@ -91,7 +93,7 @@ $conn->close();
             </div>
         <?php endif; ?>
 
-       <div class="shadow-sm border p-4 rounded-3">
+       <div class="shadow-sm bg-light border p-4 rounded-3">
         <h3 class="mt-4">Loan Applications</h3>
         <table class="table table-bordered" id="repaymentsTable">
         <thead>
@@ -125,7 +127,7 @@ $conn->close();
             </table>
        </div>
 
-       <div class="shadow-sm border mt-3 p-4 rounded-3">
+       <div class="shadow-sm bg-light border mt-3 p-4 rounded-3">
 
                 <h3 class="mt-4">Loan Repayments</h3>
                 <table class="table table-bordered" id="loansTable">
