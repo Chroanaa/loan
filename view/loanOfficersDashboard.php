@@ -76,8 +76,8 @@ $conn->close();
 
 <body>
     <?php include 'components/navbarLoanOfficer.php'; ?>
-    <div class="container-fluid text-light px-5 mb-5 mt-5">
-        <h2>Welcome to the Loan Officer's Dashboard</h2>
+    <div class="container-fluid  px-5 mb-5 mt-5">
+        <h2 class="text-light">Welcome to the Loan Officer's Dashboard</h2>
         
         <?php if (!empty($_SESSION['success'])): ?>
             <div class="alert alert-success">
