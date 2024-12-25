@@ -62,9 +62,9 @@ $conn->close();
 </style>
 <body>
     <?php include 'components/navbarAdmin.php'; ?>
-    <div class="container-fluid px-5 mt-5 mb-5">
+    <div class="container-fluid px-5 py-5" style="min-height: 100vh; background: url(../wwwroot/img/hero-bg.jpg) no-repeat center / cover">
 
-    <div class="container-fluid d-flex justify-content-around align-items-center mt-3 flex-wrap">
+    <div class="container-fluid d-flex justify-content-around align-items-center flex-wrap text-light">
         <h2>Welcome to the Admin Dashboard</h2>
 
         <div class="box">
@@ -77,7 +77,7 @@ $conn->close();
 
     </div>
 
-        <div class="shadow-sm border container-fluid p-4 mt-3 rounded-3">
+        <div class="shadow-sm border container-fluid p-4 bg-light mt-3 rounded-3">
             <h3 class="mt-4">Loan Applications</h3>
             <table class="table table-bordered" id="loansTable">
                 <thead>
@@ -114,7 +114,7 @@ $conn->close();
 
         <section class="d-flex justify-content-center align-items-center" style="gap: 1rem" id="mid-section">
 
-            <div class="shadow-sm border table-responsive p-4 mt-3 rounded-3" style="flex: 1">
+            <div class="shadow-sm bg-light border table-responsive p-4 mt-3 rounded-3" style="flex: 1">
                 <h3 class="mt-4">Loan Repayments</h3>
                 <table class="table table-bordered" id="repaymentsTable">
                     <thead>
@@ -144,7 +144,7 @@ $conn->close();
                 </table>
             </div>
 
-            <div class="shadow-sm border table-responsive p-4 mt-3 rounded-3" style="flex: 1">
+            <div class="shadow-sm bg-light border table-responsive p-4 mt-3 rounded-3" style="flex: 1">
                 <h3 class="mt-4">Overdue Loans</h3>
                     <table class="table table-bordered" id="overdueTable">
                         <thead>

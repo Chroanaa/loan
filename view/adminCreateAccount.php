@@ -31,11 +31,13 @@ $conn->close();
     }
     body {
         min-width: 857px;
+        min-height: 100vh;
+        background: url(../wwwroot/img/hero-bg.jpg) no-repeat center / cover;
     }
 </style>
 <body>
     <?php include 'components/navbarAdmin.php'; ?>
-    <div class="container mt-5 shadow-sm border mb-5 p-5">
+    <div class="container bg-light rounded-3 mt-5 shadow-sm border mb-5 p-5">
         <h2>Create Account</h2>
 
         <?php if (!empty($_SESSION['success'])): ?>

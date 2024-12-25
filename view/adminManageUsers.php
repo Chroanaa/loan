@@ -36,11 +36,13 @@ $conn->close();
     }
     body {
         min-width: 857px;
+        min-height: 100vh;
+        background: url(../wwwroot/img/hero-bg.jpg) no-repeat center / cover;
     }
 </style>
 <body>
     <?php include 'components/navbarAdmin.php'; ?>
-    <div class="container p-5 shadow-sm rounded-3 border mb-5 mt-5">
+    <div class="container p-5 bg-light shadow-sm rounded-3 border mb-5 mt-5">
         <h2>Manage Users</h2>
 
         <?php if (!empty($_SESSION['success'])): ?>
