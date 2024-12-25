@@ -87,9 +87,9 @@ $conn->close();
         <div class="box">
             
             <h3 class="mt-4">Generate Reports</h3>
-                <a href="adminGenerateWeekly.php" class="btn btn-primary">Generate Weekly Report</a>
-                <a href="adminGenerateMonthly.php" class="btn btn-primary">Generate Monthly Report</a>
-                <a href="adminGenerateAnnually.php" class="btn btn-primary">Generate Annually Report</a>
+                <a href="branchManagersGenerateWeekly.php" class="btn btn-primary">Generate Weekly Report</a>
+                <a href="branchManagersGenerateMonthly.php" class="btn btn-primary">Generate Monthly Report</a>
+                <a href="branchManagersGenerateAnnually.php" class="btn btn-primary">Generate Annually Report</a>
         </div>
 
     </div>
