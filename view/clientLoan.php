@@ -12,7 +12,7 @@ $errors = require '../controller/clientLoanController.php';
 </head>
 <body>
 <?php include 'components/navbarClient.php'; ?>
-    <div class="container shadow-sm border rounded-3 p-5 mt-5">
+    <div class="container shadow-sm border rounded-3 p-5 my-5">
         <h2>Client Loan Application</h2>
         <?php
         if (!empty($errors)) {
@@ -25,18 +25,137 @@ $errors = require '../controller/clientLoanController.php';
         }
         ?>
         <form action="" method="POST">
+            <hr>
+            <h4>Personal Information</h4>
             <div class="mb-3">
-                <label for="loan_amount" class="form-label">Loan Amount</label>
-                <input type="number" step="0.01" class="form-control" id="loan_amount" name="loan_amount" required>
+                <label for="">Full Name:</label>
+                <input type="text" name="fullName" class="form-control" placeholder="e.g., John Doe" required>
             </div>
             <div class="mb-3">
-                <label for="loan_term" class="form-label">Loan Term (in months)</label>
-                <input type="number" class="form-control" id="loan_term" name="loan_term" required>
+                <label for="">Date of Birth:</label>
+                <input type="date" name="dob" class="form-control"  required>
             </div>
             <div class="mb-3">
-                <label for="interest_rate" class="form-label">Interest Rate (%)</label>
-                <input type="number" step="0.01" class="form-control" id="interest_rate" name="interest_rate" required>
+                <label for="">Gender:</label>
+                <select name="gender" id="gender" class="form-select" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
             </div>
+            <div class="mb-3">
+                <label for="">Marital Status</label>
+                <select name="maritalStatus" id="maritalStatus" class="form-select" required>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="divorced">Divorced</option>
+                    <option value="widowed">Widowed</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="">Phone Number:</label>
+                <input type="tel" name="phone" class="form-control" placeholder="e.g., 123-456-7890" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Email:</label>
+                <input type="email" name="email" class="form-control" placeholder="e.g., johndoe@gmail.com" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Address:</label>
+                <input type="text" name="address" class="form-control" placeholder="e.g., 123 Main St, City, State" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Employment Status:</label>
+                <select name="employmentStatus" id="employmentStatus" class="form-select" required>
+                    <option value="employed">Employed</option>
+                    <option value="unemployed">Unemployed</option>
+                <select>
+            </div>
+            <div class="mb-3">
+                <label for="">Company Name:</label>
+                <input type="text" name="companyName" class="form-control" placeholder="e.g., ABC Corp" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Monthly Income</label>
+                <input type="number" name="monthlyIncome" class="form-control" placeholder="e.g., 5000" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Valid ID</label>
+                <select name="valid-id" id="valid-id" class="form-select" required>
+                    <option value="driver-license">Driver License</option>
+                    <option value="voters-id">Voters</option>
+                    <option value="sss">SSS</option>
+                    <option value="passport">Passport</option>
+                    <option value="philhealth">Philhealth</option>
+                    <option value="senior">Senior Citizen</option>
+                    <option value="gsis">GSIS</option>
+                </select>
+            </div>
+          
+            <hr>
+            <h4>Business Information</h4>
+            <div class="mb-3">
+                <label for="">Business Name:</label>
+                <input type="text" name="businessName" class="form-control" placeholder="e.g., John's Bakery" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Business Type</label>
+                <input type="text" name="businessType" class="form-control" placeholder="e.g., Bakery, Retail" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Business Address:</label>
+                <input type="text" name="businessAddress" class="form-control" placeholder="e.g., 456 Elm St, City, State" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Business Registration Number:</label>
+                <input type="text" name="businessRegNumber" class="form-control" placeholder="e.g., 123456789" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Years In Operation:</label>
+                <input type="number" name="yearsInOperation" class="form-control" placeholder="e.g., 5" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Monthly Business Income:</label>
+                <input type="number" name="monthlyBusinessIncome" class="form-control" placeholder="e.g., 10000" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Tax Identification</label>
+                <input type="text" name="taxIdentification" class="form-control" placeholder="e.g., 123-456-789" required>
+            </div>
+            <hr>
+            <h4>Loan Details</h4>
+            <div class="mb-3">
+                <label for="">Loan Id:</label>
+                <input type="text" name="loanId" class="form-control" placeholder="e.g., LOAN123456" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Loan Type:</label>
+                <input type="text" name="loanType" class="form-control" placeholder="e.g., Personal, Business" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Loan Amount:</label>
+                <input type="number" name="loanAmount" class="form-control" placeholder="e.g., 50000" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Loan Term:</label>
+                <input type="text" name="loanTerm" class="form-control" placeholder="e.g., 12 months" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Interest Rate:</label>
+                <input type="text" name="interestRate" class="form-control" placeholder="e.g., 5%" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Monthly Payment:</label>
+                <input type="text" name="monthlyPayment" class="form-control" placeholder="e.g., 1000" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Loan Start Date:</label>
+                <input type="date" name="loanStartDate" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Loan End Date:</label>
+                <input type="date" name="loanEndDate" class="form-control" required>
+            </div>
+          
             <button type="submit" class="btn btn-primary">Submit Application</button>
         </form>
     </div>
