@@ -1,44 +1,44 @@
 <?php 
-// session_start();
-// if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'client') {
-//     header("Location: login.php");
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'client') {
+    header("Location: login.php");
+    exit();
+}
 
-// // Connect to the database
-// require_once "../model/db.php";
+// Connect to the database
+require_once "../model/db.php";
 
-// // Fetch client loan applications
-// $user_id = $_SESSION['user_id'];
-// $sql = "SELECT * FROM loan_applications WHERE client_id = ?";
-// $stmt = $conn->prepare($sql);
-// $stmt->bind_param("i", $user_id);
-// $stmt->execute();
-// $result = $stmt->get_result();
-// $loans = $result->fetch_all(MYSQLI_ASSOC);
+// Fetch client loan applications
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT * FROM loan_applications WHERE client_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$loans = $result->fetch_all(MYSQLI_ASSOC);
 
-// $stmt->close();
+$stmt->close();
 
-// // Fetch client loan repayments
-// $sql = "SELECT * FROM loan_repayments WHERE loan_id IN (SELECT loan_id FROM loan_applications WHERE client_id = ?)";
-// $stmt = $conn->prepare($sql);
-// $stmt->bind_param("i", $user_id);
-// $stmt->execute();
-// $result = $stmt->get_result();
-// $repayments = $result->fetch_all(MYSQLI_ASSOC);
+// Fetch client loan repayments
+$sql = "SELECT * FROM loan_repayments WHERE loan_id IN (SELECT loan_id FROM loan_applications WHERE client_id = ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$repayments = $result->fetch_all(MYSQLI_ASSOC);
 
-// $stmt->close();
+$stmt->close();
 
-// // Fetch unread notifications count
-// $sql = "SELECT COUNT(*) AS unread_count FROM notifications WHERE client_id = ? AND is_read = 0";
-// $stmt = $conn->prepare($sql);
-// $stmt->bind_param("i", $user_id);
-// $stmt->execute();
-// $result = $stmt->get_result();
-// $unread_count = $result->fetch_assoc()['unread_count'];
+// Fetch unread notifications count
+$sql = "SELECT COUNT(*) AS unread_count FROM notifications WHERE client_id = ? AND is_read = 0";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$unread_count = $result->fetch_assoc()['unread_count'];
 
-// $stmt->close();
-// $conn->close();
+$stmt->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>

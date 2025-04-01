@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2024 at 09:19 AM
+-- Generation Time: Mar 26, 2025 at 02:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -70,9 +70,6 @@ CREATE TABLE `loan_applications` (
 --
 
 INSERT INTO `loan_applications` (`loan_id`, `client_id`, `loan_amount`, `loan_term`, `interest_rate`, `status`, `created_at`, `updated_at`) VALUES
-(17, 27, 2313.00, -1, 999.99, 'Pending', '2024-12-23 12:02:42', '2024-12-23 12:02:42'),
-(18, 27, 32131.00, 321321, 231.00, 'Pending', '2024-12-23 12:02:44', '2024-12-23 12:02:44'),
-(19, 27, 3213.00, 13131, 999.99, 'Pending', '2024-12-23 12:02:46', '2024-12-23 12:02:46'),
 (20, 26, 10000.00, 12, 10.00, 'Paid', '2024-12-23 12:08:57', '2024-12-23 12:09:45'),
 (21, 26, 1000.00, 12, 10.00, 'Approved', '2024-12-23 13:12:37', '2024-12-23 13:13:23');
 
@@ -168,11 +165,11 @@ CREATE TABLE `user_tbl` (
 --
 
 INSERT INTO `user_tbl` (`user_id`, `name`, `address`, `contact`, `role`, `username`, `email`, `password`, `repeat_password`, `created_at`, `remember_token`, `reset_token`, `reset_expires`, `branch_id`) VALUES
-(12, 'admin', '32132', '09263627271', 'admin', 'admin', 'admin@gmail.com', '$2y$10$P4dhAkQ5BMYLq5ZsJpnx4uAgGuW1H5jS8WVlGdO41kcT1xkEvIpoC', '', '2024-12-23 02:50:03', NULL, NULL, NULL, NULL),
-(24, 'Loan Officer Example', NULL, NULL, 'lo', 'loanofficer', 'loanofficer@gmail.com', '$2y$10$tn2wqfrCFErGo9IDnVLYue1x.BeGg/pnGNgAiuuEBqmobiX./Jm0K', '', '2024-12-23 11:14:18', NULL, NULL, NULL, 1),
-(25, 'Branch Manager Example', NULL, NULL, 'bm', 'branchmanager', 'branchmanager@gmail.com', '$2y$10$tCMdmhR09TCTG8eY8u6aqe7f8FIMPr216TAzre5/VATPGakIkJRcK', '', '2024-12-23 11:15:31', NULL, NULL, NULL, 6),
+(12, 'admin', '32132', '09263627271', 'admin', 'admin', 'admin@gmail.com', '$2y$10$mz33Amq8wkB1LbqK1ZhfiOrncICdcAlIlbTo5y7F3iUX31Kh0QNJ6', '', '2024-12-23 02:50:03', NULL, NULL, NULL, NULL),
+(24, 'Loan Officer Example', NULL, NULL, 'lo', 'loanofficer', 'loanofficer@gmail.com', '$2y$10$vLVOCLNF.7KDxnQaALcWBOWxcgwww3dytGy2/DaZKEXlFEdmeJDbq', '', '2024-12-23 11:14:18', NULL, NULL, NULL, 1),
+(25, 'Branch Manager Example', NULL, NULL, 'bm', 'branchmanager', 'branchmanager@gmail.com', '$2y$10$x9xZQo1MgsQcRkECjrC2j.JzsGxj3Q2gSp1BHdmnoO0paYcJGJwFO', '', '2024-12-23 11:15:31', NULL, NULL, NULL, 6),
 (26, 'Kim F. Gamot', 'Dakila St. Batasan Hills Quezon City', '09263627274', 'client', 'duplicationph', 'gamot.kim.fernandez@gmail.com', '$2y$10$7DGzrt7IhXrzD0x7qoFu6ejlG/xS.OhtLI1KPVkPiAY0uNYjfCroO', '', '2024-12-23 11:19:43', NULL, NULL, NULL, 1),
-(27, 'client2', 'dakila', '09263627271', 'client', 'client2', 'gamotkim96@gmail.com', '$2y$10$f5ymDMvdYMJPsnv4EoaKVOQdQ356nvavHcOJZGiCCUXE3Z7S8XKl6', '', '2024-12-23 12:02:30', NULL, NULL, NULL, 2);
+(29, 'Duplify', 'dasdas', '09263627271', 'client', 'duplicationfpsa', 'gamotkim96@gmail.com', '$2y$10$Gl7rF8pexPeYLffaqw219OWbPODnfBUViiZ/8E7CiKMZT3d7RGabe', '', '2025-03-26 13:36:12', NULL, NULL, NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -234,7 +231,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `loan_repayments`
@@ -252,13 +249,13 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables

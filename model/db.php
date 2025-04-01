@@ -6,6 +6,7 @@ $database = "loaning_db";    // Name of the database
 
 $conn = new mysqli($host, $usernameDb, $passwordDb, $database);
 
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

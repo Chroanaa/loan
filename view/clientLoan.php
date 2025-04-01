@@ -124,8 +124,12 @@ $errors = require '../controller/clientLoanController.php';
             <hr>
             <h4>Loan Details</h4>
             <div class="mb-3">
-                <label for="">Loan Id:</label>
-                <input type="text" name="loanId" class="form-control" placeholder="e.g., LOAN123456" required>
+                <label for="">Is this your first loan:</label>
+                <select name="first_loan" id="check_if_first_loan">
+                    <option value="" selected>yes or no</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="">Loan Type:</label>
@@ -133,7 +137,7 @@ $errors = require '../controller/clientLoanController.php';
             </div>
             <div class="mb-3">
                 <label for="">Loan Amount:</label>
-                <input type="number" name="loanAmount" class="form-control" placeholder="e.g., 50000" required>
+                <input type="number" name="loanAmount" id = "loanAmount" class="form-control" placeholder="e.g., 50000" required>
             </div>
             <div class="mb-3">
                 <label for="">Loan Term:</label>
@@ -162,5 +166,16 @@ $errors = require '../controller/clientLoanController.php';
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
+    <script>
+        const firstLoan = document.getElementById('check_if_first_loan');
+        firstLoan.addEventListener('change', function() {
+            if (this.value === 'yes') {
+                document.querySelector('#loanAmount').value = 5000
+            }
+            else if (this.value === 'no') {
+                document.querySelector('#loanAmount').value = ""
+            }   
+        });
+    </script>
 </body>
 </html>
