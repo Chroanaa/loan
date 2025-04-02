@@ -51,7 +51,6 @@ $conn->close();
     <?php include 'components/navbarLoanOfficer.php'; ?>
     <div class="container bg-light shadow-sm border rounded-3 p-5 mt-5 mb-5">
         <h2>Manage Client Loans</h2>
-
         <?php if (isset($_SESSION['success'])): ?>
             <div class="alert alert-success">
                 <?php 
@@ -76,12 +75,13 @@ $conn->close();
             <thead>
                 <tr>
                     <th>Loan ID</th>
-                    <th>Amount</th>
+                    <th>Name</th>
                     <th>Term (months)</th>
                     <th>Interest Rate (%)</th>
                     <th>Status</th>
                     <th>Created At</th>
                     <th>Updated At</th>
+                    <th>Profile</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -95,6 +95,11 @@ $conn->close();
                     <td><?php echo htmlspecialchars($loan['status']); ?></td>
                     <td><?php echo htmlspecialchars($loan['created_at']); ?></td>
                     <td><?php echo htmlspecialchars($loan['updated_at']); ?></td>
+                    <td>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#view-profile">
+                            View
+                        </button>
+                    </td>
                     <td>
                         <?php if ($loan['status'] == 'Pending'): ?>
                         <a href="../controller/approveLoanController.php?loan_id=<?php echo $loan['loan_id']; ?>&client_id=<?php echo $client_id; ?>" class="btn btn-success">Approve</a>
@@ -110,6 +115,52 @@ $conn->close();
             </tbody>
         </table>
     </div>
+
+
+    <!-- Modal -->
+     <div class="modal" id="view-profile">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Client Profile</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <hr>
+                    <h5>Personal Information</h5>
+                    <hr>
+                    <p>Date of birth:</p>
+                    <p>Gender:</p>
+                    <p>Marital Status:</p>
+                    <p>Phone Number:</p>
+                    <p>Email:</p>
+                    <p>Address:</p>
+                    <p>Employment Status:</p>
+                    <p>Company Name:</p>
+                    <p>Monthly Income:</p>
+                    <p>Valid Id:</p>
+                    <hr>
+                    <h5>Business Information:</h5>
+                    <hr>
+                    <p>Business Name:</p>
+                    <p>Business Type:</p>
+                    <p>Business Address:</p>
+                    <p>Business Registration Number:</p>
+                    <p>Years in operation:</p>
+                    <p>Monthly Business Income</p>
+                    <p>Tax Identification:</p>
+                    <hr>
+                    <h5>Loan Information:</h5>
+                    <hr>
+                    <p>Loan Type:</p>
+                    <p>Loan Amount:</p>
+                    <p>Monthly Payment:</p>
+                    <p>Loan Start:</p>
+                    <p>Loan End:</p>
+                </div>
+            </div>
+        </div>
+     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
