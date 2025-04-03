@@ -20,6 +20,19 @@ $loans = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
 $conn->close();
+function calculateChanceOfApproval($monthlyIncome, $monthlyBusinessIncome) {
+    $totalIncome = $monthlyIncome + $monthlyBusinessIncome;
+
+    if ($totalIncome >= 50000) {
+        return "High (90%)";
+    } elseif ($totalIncome >= 30000) {
+        return "Medium (70%)";
+    } elseif ($totalIncome >= 15000) {
+        return "Low (50%)";
+    } else {
+        return "Very Low (30%)";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,6 +94,7 @@ $conn->close();
                     <th>Status</th>
                     <th>Created At</th>
                     <th>Updated At</th>
+                    <th>Chance of approval</th>
                     <th>Profile</th>
                     <th>Actions</th>
                 </tr>
@@ -89,15 +103,40 @@ $conn->close();
                 <?php foreach ($loans as $loan): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($loan['loan_id']); ?></td>
-                    <td><?php echo htmlspecialchars($loan['loan_amount']); ?></td>
+                    <td><?php echo htmlspecialchars($loan['fullname']); ?></td>
                     <td><?php echo htmlspecialchars($loan['loan_term']); ?></td>
                     <td><?php echo htmlspecialchars($loan['interest_rate']); ?></td>
                     <td><?php echo htmlspecialchars($loan['status']); ?></td>
                     <td><?php echo htmlspecialchars($loan['created_at']); ?></td>
                     <td><?php echo htmlspecialchars($loan['updated_at']); ?></td>
+                    <td><?php echo calculateChanceOfApproval($loan['monthly_income'], $loan['monthly_business_income']); ?></td>
                     <td>
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#view-profile">
-                            View
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#view-profile" 
+                                        onclick="viewProfile(
+                                        '<?php echo htmlspecialchars($loan['dob']); ?>',
+                                        '<?php echo htmlspecialchars($loan['gender']); ?>',
+                                        '<?php echo htmlspecialchars($loan['marital_status']); ?>',
+                                        '<?php echo htmlspecialchars($loan['phonenumber']); ?>',
+                                        '<?php echo htmlspecialchars($loan['email']); ?>',
+                                        '<?php echo htmlspecialchars($loan['address']); ?>',
+                                        '<?php echo htmlspecialchars($loan['employment_status']); ?>',
+                                        '<?php echo htmlspecialchars($loan['company_name']); ?>',
+                                        '<?php echo htmlspecialchars($loan['monthly_income']); ?>',
+                                        '<?php echo htmlspecialchars($loan['valid_id']); ?>',
+                                        '<?php echo htmlspecialchars($loan['business_name']); ?>',
+                                        '<?php echo htmlspecialchars($loan['business_type']); ?>',
+                                        '<?php echo htmlspecialchars($loan['business_address']); ?>',
+                                        '<?php echo htmlspecialchars($loan['business_registration']); ?>',
+                                        '<?php echo htmlspecialchars($loan['years_operation']); ?>',
+                                        '<?php echo htmlspecialchars($loan['monthly_business_income']); ?>',
+                                        '<?php echo htmlspecialchars($loan['tax_id']); ?>',
+                                        '<?php echo htmlspecialchars($loan['loan_type']); ?>',
+                                        '<?php echo htmlspecialchars($loan['loan_amount']); ?>',
+                                        '<?php echo htmlspecialchars($loan['monthly_payment']); ?>',
+                                        '<?php echo htmlspecialchars($loan['loan_start']); ?>',
+                                        '<?php echo htmlspecialchars($loan['loan_end']); ?>'
+                                            )">
+                                        View
                         </button>
                     </td>
                     <td>
@@ -129,34 +168,34 @@ $conn->close();
                     <hr>
                     <h5>Personal Information</h5>
                     <hr>
-                    <p>Date of birth:</p>
-                    <p>Gender:</p>
-                    <p>Marital Status:</p>
-                    <p>Phone Number:</p>
-                    <p>Email:</p>
-                    <p>Address:</p>
-                    <p>Employment Status:</p>
-                    <p>Company Name:</p>
-                    <p>Monthly Income:</p>
-                    <p>Valid Id:</p>
-                    <hr>
-                    <h5>Business Information:</h5>
-                    <hr>
-                    <p>Business Name:</p>
-                    <p>Business Type:</p>
-                    <p>Business Address:</p>
-                    <p>Business Registration Number:</p>
-                    <p>Years in operation:</p>
-                    <p>Monthly Business Income</p>
-                    <p>Tax Identification:</p>
-                    <hr>
-                    <h5>Loan Information:</h5>
-                    <hr>
-                    <p>Loan Type:</p>
-                    <p>Loan Amount:</p>
-                    <p>Monthly Payment:</p>
-                    <p>Loan Start:</p>
-                    <p>Loan End:</p>
+                <p id="dob">Date of birth:</p>
+                <p id="gender">Gender:</p>
+                <p id="maritalStatus">Marital Status:</p>
+                <p id="phoneNumber">Phone Number:</p>
+                <p id="email">Email:</p>
+                <p id="address">Address:</p>
+                <p id="employmentStatus">Employment Status:</p>
+                <p id="companyName">Company Name:</p>
+                <p id="monthlyIncome">Monthly Income:</p>
+                <p id="validId">Valid Id:</p>
+                <hr>
+                <h5>Business Information:</h5>
+                <hr>
+                <p id="businessName">Business Name:</p>
+                <p id="businessType">Business Type:</p>
+                <p id="businessAddress">Business Address:</p>
+                <p id="businessRegistration">Business Registration Number:</p>
+                <p id="yearsOperation">Years in operation:</p>
+                <p id="monthlyBusinessIncome">Monthly Business Income:</p>
+                <p id="taxId">Tax Identification:</p>
+                <hr>
+                <h5>Loan Information:</h5>
+                <hr>
+                <p id="loanType">Loan Type:</p>
+                <p id="loanAmount">Loan Amount:</p>
+                <p id="monthlyPayment">Monthly Payment:</p>
+                <p id="loanStart">Loan Start:</p>
+                <p id="loanEnd">Loan End:</p>
                 </div>
             </div>
         </div>
@@ -179,7 +218,38 @@ $conn->close();
 
 
     </script>                            
+<script>
+function viewProfile(
+    dob, gender, maritalStatus, phoneNumber, email, address, employmentStatus, companyName, monthlyIncome, validId,
+    businessName, businessType, businessAddress, businessRegistration, yearsOperation, monthlyBusinessIncome, taxId,
+    loanType, loanAmount, monthlyPayment, loanStart, loanEnd
+) {
+    document.getElementById('dob').textContent = "Date of birth: " + dob;
+    document.getElementById('gender').textContent = "Gender: " + gender;
+    document.getElementById('maritalStatus').textContent = "Marital Status: " + maritalStatus;
+    document.getElementById('phoneNumber').textContent = "Phone Number: " + phoneNumber;
+    document.getElementById('email').textContent = "Email: " + email;
+    document.getElementById('address').textContent = "Address: " + address;
+    document.getElementById('employmentStatus').textContent = "Employment Status: " + employmentStatus;
+    document.getElementById('companyName').textContent = "Company Name: " + companyName;
+    document.getElementById('monthlyIncome').textContent = "Monthly Income: " + monthlyIncome;
+    document.getElementById('validId').textContent = "Valid Id: " + validId;
 
+    document.getElementById('businessName').textContent = "Business Name: " + businessName;
+    document.getElementById('businessType').textContent = "Business Type: " + businessType;
+    document.getElementById('businessAddress').textContent = "Business Address: " + businessAddress;
+    document.getElementById('businessRegistration').textContent = "Business Registration Number: " + businessRegistration;
+    document.getElementById('yearsOperation').textContent = "Years in operation: " + yearsOperation;
+    document.getElementById('monthlyBusinessIncome').textContent = "Monthly Business Income: " + monthlyBusinessIncome;
+    document.getElementById('taxId').textContent = "Tax Identification: " + taxId;
+
+    document.getElementById('loanType').textContent = "Loan Type: " + loanType;
+    document.getElementById('loanAmount').textContent = "Loan Amount: " + loanAmount;
+    document.getElementById('monthlyPayment').textContent = "Monthly Payment: " + monthlyPayment;
+    document.getElementById('loanStart').textContent = "Loan Start: " + loanStart;
+    document.getElementById('loanEnd').textContent = "Loan End: " + loanEnd;
+}
+</script>
 
 </body>
 </html>
